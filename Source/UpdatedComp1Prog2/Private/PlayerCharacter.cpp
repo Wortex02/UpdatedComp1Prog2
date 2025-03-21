@@ -20,7 +20,9 @@ void APlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	InteractWidget = CreateWidget(Cast<APlayerController>(GetController()), interactWidgetClass);
+	InteractWidget = CreateWidget<UInventoryWidget>(Cast<APlayerController>(GetController()), InteractWidgetClass);
+	InteractWidget = CreateWidget(Cast<APlayerController>(GetController()), InteractWidgetClass);
+	InventoryWidget->AddToViewport(0);
 	InteractWidget->AddToViewport(0);
 	InteractWidget->SetVisibility(ESlateVisibility::Collapsed);
 

@@ -5,10 +5,12 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include <InputActionValue.h>
+#include "ItemDatabase.h"
 #include "PlayerCharacter.generated.h"
 
 class UInputAction;
 class UInputMappingContext;
+class UInventoryWidget;
 
 UCLASS()
 class APlayerCharacter : public ACharacter
@@ -45,15 +47,30 @@ public:
 	UInputAction* InteractAction;
 
 	UPROPERTY(EditDefaultsOnly)
+	UInputAction* InventoryAction;
+
+	UPROPERTY(EditDefaultsOnly)
 	UInputMappingContext* MappingContext;
 
 	UPROPERTY(EditDefaultsOnly)
-	TSubclassOf<UUserWidget> interactWidgetClass;
+	TSubclassOf<UUserWidget> InteractWidgetClass;
+
+
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<UUserWidget> InventoryWidgetClass;
+
+	UPROPERTY()
+	UInventoryWidget* InventoryWidget;
 
 	UPROPERTY()
 	UUserWidget* InteractWidget;
 
-private:
+	UPROPERTY(EditDefaultsOnly)
+	UItemDatabase* ItemDatabase;
+
+	TArray<FItemData> Inventory;
+
+
 
 	void Move(const FInputActionValue& ActionValue);
 
@@ -63,8 +80,10 @@ private:
 
 	void InteractCheck();
 
+	void ToggleInventory();
+
 	FHitResult InteractHitResult;
 	FVector ViewVector;
 	FRotator ViewRotation;
-
+	FHitResult InteractVectorEnd;
 };

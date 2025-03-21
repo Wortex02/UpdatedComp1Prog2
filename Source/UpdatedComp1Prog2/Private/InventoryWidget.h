@@ -4,7 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "ItemDatabase.h"
 #include "InventoryWidget.generated.h"
+
+class UListView;
 
 /**
  * 
@@ -14,4 +17,12 @@ class UInventoryWidget : public UUserWidget
 {
 	GENERATED_BODY()
 	
+public:
+
+	void RefreshInventory(const TArray<FItemData>& Inventory);
+
+private:
+
+	UPROPERTY(meta = (BindWidget))
+	UListView* ItemList;
 };

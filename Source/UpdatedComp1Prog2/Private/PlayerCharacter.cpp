@@ -22,8 +22,8 @@ APlayerCharacter::APlayerCharacter()
 void APlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-
-	InteractWidget = CreateWidget<UInventoryWidget>(Cast<APlayerController>(GetController()), InteractWidgetClass);
+	
+	InventoryWidget = CreateWidget<UInventoryWidget>(Cast<APlayerController>(GetController()), InventoryWidgetClass);
 	InteractWidget = CreateWidget(Cast<APlayerController>(GetController()), InteractWidgetClass);
 	InventoryWidget->AddToViewport(0);
 	InteractWidget->AddToViewport(0);
@@ -115,10 +115,10 @@ void APlayerCharacter::InteractCheck()
 {
 	Cast<APlayerController>(GetController())->GetPlayerViewPoint(ViewVector, ViewRotation);
 	FVector VecDirection = ViewRotation.Vector() * 500;
-	FVector interactVectorEnd = ViewVector + VecDirection;
+	InteractVectorEnd = ViewVector + VecDirection;
 	FCollisionQueryParams QueryParams;
 	QueryParams.AddIgnoredActor(this);
-	GetWorld()->LineTraceSingleByChannel(InteractHitResult, ViewVector, interactVectorEnd, ECollisionChannel::ECC_GameTraceChannel1, QueryParams);
+	GetWorld()->LineTraceSingleByChannel(InteractHitResult, ViewVector, InteractVectorEnd, ECollisionChannel::ECC_GameTraceChannel1, QueryParams);
 	if (Cast<AItem>(InteractHitResult.GetActor()))
 	{
 		InteractWidget->SetVisibility(ESlateVisibility::Visible);
@@ -144,7 +144,7 @@ void APlayerCharacter::ToggleInventory()
 	{
 		InventoryWidget->SetVisibility(ESlateVisibility::Collapsed);
 
-		Cast<APlayerController>(GetController())->SetInputMode(FInputModeGameAndUI());
+		Cast<APlayerController>(GetController())->SetInputMode(FInputModeGameOnly());
 		Cast<APlayerController>(GetController())->SetCinematicMode(false, true, true);
 		Cast<APlayerController>(GetController())->bShowMouseCursor = false;
 	}

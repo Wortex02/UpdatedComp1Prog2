@@ -21,11 +21,11 @@ void UInventoryEntry::NativeOnListItemObjectSet(UObject* ListItemObject)
 }
 
 void UInventoryEntry::DropItem()
-{/*
+{
 	APlayerCharacter* PlayerCharacter = Cast<APlayerCharacter>(GetOwningPlayer()->GetPawn());
 	FItemData ItemData = GetListItem<UItemUIObject>()->ItemData;
 	GetWorld()->SpawnActor<AItem>(ItemData.Class, PlayerCharacter->InteractVectorEnd, FRotator());
-	PlayerCharacter->Inventory.Remove(ItemData);
+	PlayerCharacter->Inventory.RemoveSingle(ItemData);
 	PlayerCharacter->InventoryWidget->RefreshInventory(PlayerCharacter->Inventory);
-	DropButton->OnClicked.Clear();*/
+	DropButton->OnClicked.Clear();
 }

@@ -52,9 +52,6 @@ public:
 	UPROPERTY(EditDefaultsOnly)
 	UInputMappingContext* MappingContext;
 
-	UPROPERTY(EditDefaultsOnly)
-	TSubclassOf<UUserWidget> InteractWidgetClass;
-
 
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<UUserWidget> InventoryWidgetClass;
@@ -62,8 +59,12 @@ public:
 	UPROPERTY()
 	UInventoryWidget* InventoryWidget;
 
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<UUserWidget> InteractWidgetClass;
+
 	UPROPERTY()
 	UUserWidget* InteractWidget;
+
 
 	UPROPERTY(EditDefaultsOnly)
 	UItemDatabase* ItemDatabase;
@@ -82,8 +83,8 @@ public:
 
 	void ToggleInventory();
 
-	FHitResult InteractHitResult;
 	FVector ViewVector;
 	FRotator ViewRotation;
-	FHitResult InteractVectorEnd;
+	FVector InteractVectorEnd;
+	FHitResult InteractHitResult;
 };

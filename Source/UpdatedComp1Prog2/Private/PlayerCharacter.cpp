@@ -30,6 +30,7 @@ void APlayerCharacter::BeginPlay()
 	InventoryWidget->SetVisibility(ESlateVisibility::Collapsed);
 	InteractWidget->SetVisibility(ESlateVisibility::Collapsed);
 
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Press 'I' to open inventory\n\nPress 'E' to pick stuff up"));
 }
 
 // Called every frame
